@@ -1,0 +1,10 @@
+body {
+  /*     font-family: sans-serif; */
+  font-size: 1.9em;
+  /* max-width: $wrapper-max-width; */
+  margin: 0 auto;
+  padding: 30px;
+  font-family: "Special Elite", cursive;
+  text-align: center;
+  background-color: rgba(245, 245, 220, 0.8);
+}
