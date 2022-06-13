@@ -21,7 +21,7 @@
     position: sticky;
     background-color: rgba(75, 83, 32, 1);
     top: 0.3px;
-    font-size: 1.4em;
+    font-size: 1.2em;
     color: white;
     text-align: center;
     padding: 2px 0px 2px 0px;
@@ -29,6 +29,8 @@
 
   main {
     padding-top: 25px;
+    margin-left: 10px;
+    margin-right: 10px;
   }
 
   hr {
@@ -83,7 +85,9 @@
   }
 
   footer {
-    padding-top: 15px;
+    padding-top: 25px;
+    margin-left: 10px;
+    margin-right: 10px;
     font-size: 0.5em;
   }
 
