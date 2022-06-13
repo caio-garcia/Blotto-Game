@@ -49,6 +49,23 @@ class PlayerColonel {
   assignTroops(noOfTroops) {
     this.noOfTroops = noOfTroops;
   }
+  //   battleFieldDeployment(troops) {
+  //     //checking on non-decrescent rule
+  //     let decrecentArr = [...troops];
+  //     decrecentArr.sort((a, b) => {
+  //       return b - a;
+  //     });
+
+  //     let status = true;
+  //     for (let i = 0; i < troops.length; i++) {
+  //       if (troops[i] === decrecentArr[i]) {
+  //         status *= true;
+  //       } else {
+  //         status *= false;
+  //       }
+  //     }
+  //     return status;
+  //   }
 }
 
 class NPCColonel {
@@ -62,6 +79,7 @@ class NPCColonel {
   assignTroops(noOfTroops) {
     this.noOfTroops = noOfTroops;
   }
+  battleFieldDeployment(troops) {}
 }
 
 //TESTING
@@ -94,8 +112,8 @@ myGame.createBattleFields();
 console.log(myGame.battleFields);
 
 //RAID
-plTroops = [2, 2, 2];
-npcTroops = [-1, -1, -4];
+let plTroops = [2, 2, 2];
+let npcTroops = [-1, -1, -4];
 
 myGame.raid(plTroops);
 myGame.raid(npcTroops);
