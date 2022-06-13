@@ -3,7 +3,7 @@
   --background-color: rgba(245, 245, 220, 0.6);
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 520px) {
   body {
     /*     font-family: sans-serif; */
     font-size: 1.2em;
