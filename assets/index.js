@@ -58,9 +58,9 @@ function typeWriter() {
 
 window.onload = typeWriter();
 
-// START Button Action
+//LEVEL page function
 
-srtBtn.addEventListener("click", () => {
+function lvlPgFunction() {
   if (playerName.value === "") {
     window.Error(`Please enter your name, Colonel!`);
   } else {
@@ -78,7 +78,7 @@ srtBtn.addEventListener("click", () => {
       li.innerHTML = `<h2>${bttlFieldIds[i]}</h2>
               <div class='troops-list'>
               <button class='btn-decremeter'>-</button>
-              <h4 class='troop-number'>0</h4>
+              <h4 class='troop-number'>1</h4>
               <button class='btn-incremeter'>+</button></div>`;
       bttlFieldList.appendChild(li);
     }
@@ -86,14 +86,22 @@ srtBtn.addEventListener("click", () => {
     let btnDecremeter = document.getElementsByClassName("btn-decremeter");
     for (let i = 0; i < btnDecremeter.length; i++) {
       btnDecremeter[i].addEventListener("click", () => {
-        troopNumbers[i].innerHTML = Number(troopNumbers[i].innerHTML) - 1;
+        if (Number(troopNumbers[i].innerHTML) > 1) {
+          troopNumbers[i].innerHTML = Number(troopNumbers[i].innerHTML) - 1;
+        }
       });
     }
     let btnIncremeter = document.getElementsByClassName("btn-incremeter");
     for (let i = 0; i < btnDecremeter.length; i++) {
       btnIncremeter[i].addEventListener("click", () => {
-        troopNumbers[i].innerHTML = Number(troopNumbers[i].innerHTML) + 1;
+        if (Number(troopNumbers[i].innerHTML) >= 1) {
+          troopNumbers[i].innerHTML = Number(troopNumbers[i].innerHTML) + 1;
+        }
       });
     }
   }
-});
+}
+
+// START Button Action
+
+srtBtn.addEventListener("click", lvlPgFunction);
