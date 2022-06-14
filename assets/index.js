@@ -61,7 +61,7 @@ window.onload = typeWriter();
 
 //LEVEL page function
 
-function lvlPgFunction() {
+function gamePgFunction() {
   if (playerName.value === "") {
     window.Error(`Please enter your name, Colonel!`);
   } else {
@@ -72,7 +72,9 @@ function lvlPgFunction() {
     blottoGame.playerName = playerName.value;
     introLevelText.innerHTML = `Cel. ${blottoGame.playerName}, this is your mission:`;
     levelPlace.innerHTML = blottoGame.getBattleFieldName();
-    numberOfTroops.innerHTML = `You have <bold>${blottoGame.noOfTroops}</bold> troops available`;
+    numberOfTroops.innerHTML = `You still have <bold class="available-troops">${
+      blottoGame.noOfTroops - blottoGame.noOfBattleFields
+    }</bold> troops available`;
     //assinging battlefields to the engine
     blottoGame.createBattleFields();
     //getting the list of battlefields for current level
@@ -85,20 +87,32 @@ function lvlPgFunction() {
               <button class='btn-incremeter'>+</button></div>`;
       bttlFieldList.appendChild(li);
     }
+    let availTroops = document.getElementsByClassName("available-troops");
+    // console.log(availTroops[0].innerHTML);
     let troopNumbers = document.getElementsByClassName("troop-number");
     let btnDecremeter = document.getElementsByClassName("btn-decremeter");
     for (let i = 0; i < btnDecremeter.length; i++) {
       btnDecremeter[i].addEventListener("click", () => {
-        if (Number(troopNumbers[i].innerHTML) > 1) {
+        if (
+          Number(troopNumbers[i].innerHTML) > 1 &&
+          Number(availTroops[0].innerHTML) >= 0 &&
+          Number(availTroops[0].innerHTML) <= blottoGame.noOfTroops
+        ) {
           troopNumbers[i].innerHTML = Number(troopNumbers[i].innerHTML) - 1;
+          availTroops[0].innerHTML = Number(availTroops[0].innerHTML) + 1;
         }
       });
     }
     let btnIncremeter = document.getElementsByClassName("btn-incremeter");
     for (let i = 0; i < btnDecremeter.length; i++) {
       btnIncremeter[i].addEventListener("click", () => {
-        if (Number(troopNumbers[i].innerHTML) >= 1) {
+        if (
+          Number(troopNumbers[i].innerHTML) >= 1 &&
+          Number(availTroops[0].innerHTML) <= blottoGame.noOfTroops &&
+          Number(availTroops[0].innerHTML) > 0
+        ) {
           troopNumbers[i].innerHTML = Number(troopNumbers[i].innerHTML) + 1;
+          availTroops[0].innerHTML = Number(availTroops[0].innerHTML) - 1;
         }
       });
     }
@@ -115,7 +129,7 @@ function attack() {
 
 // START Button Action
 
-srtBtn.addEventListener("click", lvlPgFunction);
+srtBtn.addEventListener("click", gamePgFunction);
 
 atkBtn.addEventListener("click", () => {
   console.log("ATTACK!");
