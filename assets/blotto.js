@@ -37,10 +37,29 @@ class BlottoGame {
       return `This was a draw!`;
     }
   }
+
+  getBattleFieldName() {
+    const placeNames = [
+      "El Alamein",
+      "Tug Argan",
+      "Gembloux",
+      "Dunkirk",
+      "Gulch",
+      "Itter",
+      "Tali-Ihantala",
+      "Kharkov",
+      "Rostov",
+    ];
+    const fieldNames = ["Lakes", "Hills", "Bunkers", "Villages", "Deserts"];
+
+    return `${this.noOfBattleFields} ${
+      fieldNames[Math.floor(Math.random() * fieldNames.length)]
+    } of ${placeNames[Math.floor(Math.random() * placeNames.length)]}`;
+  }
 }
 class PlayerColonel {
-  constructor(playerName) {
-    this.playerName = playerName;
+  constructor() {
+    this.playerName = "";
     this.noOfTroops = 6;
   }
   colonelName() {
@@ -123,3 +142,9 @@ console.log(myGame.battleFields);
 //EVALUATION
 
 console.log(myGame.winnerEvaluation());
+
+//BattleField name
+
+console.log(myGame.getBattleFieldName());
+console.log(myGame.getBattleFieldName());
+console.log(myGame.getBattleFieldName());
