@@ -1,7 +1,7 @@
-var i = 0;
-var txt = "The Blotto Game"; /* The text */
+let i = 0;
+let speed = 250; /* The speed/duration of the effect in milliseconds */
+let txt = "The Blotto Game"; /* The text */
 const mainTitle = document.getElementById("blotto-title");
-var speed = 230; /* The speed/duration of the effect in milliseconds */
 
 console.log(txt.charAt(7));
 console.log(mainTitle);
@@ -14,4 +14,5 @@ function typeWriter() {
   }
 }
 
-window.onload(typeWriter());
+// window.onload(typeWriter());
+window.onload = typeWriter();
