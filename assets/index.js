@@ -37,6 +37,7 @@ const bttlFieldIds = [
   "Y",
   "Z",
 ];
+const atkBtn = document.getElementById("atk-btn");
 
 const blottoGame = new BlottoGame();
 const player = new PlayerColonel();
@@ -105,3 +106,7 @@ function lvlPgFunction() {
 // START Button Action
 
 srtBtn.addEventListener("click", lvlPgFunction);
+
+atkBtn.addEventListener("click", () => {
+  console.log("ATTACK!");
+});
