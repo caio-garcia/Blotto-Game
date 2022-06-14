@@ -9,6 +9,34 @@ const levelPage = document.getElementById("level");
 const introLevelText = document.getElementById("level-intro");
 const levelPlace = document.getElementById("level-place");
 const numberOfTroops = document.getElementById("number-of-troops");
+const bttlFieldList = document.querySelector("#level-battlefields ul");
+const bttlFieldIds = [
+  "A",
+  "B",
+  "C",
+  "D",
+  "E",
+  "F",
+  "G",
+  "H",
+  "I",
+  "J",
+  "K",
+  "L",
+  "M",
+  "N",
+  "O",
+  "P",
+  "Q",
+  "R",
+  "S",
+  "T",
+  "U",
+  "V",
+  "X",
+  "Y",
+  "Z",
+];
 
 const blottoGame = new BlottoGame();
 const player = new PlayerColonel();
@@ -36,11 +64,36 @@ srtBtn.addEventListener("click", () => {
   if (playerName.value === "") {
     window.Error(`Please enter your name, Colonel!`);
   } else {
+    //disabling initial content
     startPage.style.display = "none";
+    //showing up level's content
     levelPage.style.display = "initial";
     player.playerName = playerName.value;
-    introLevelText.innerHTML = `Cel. ${player.playerName}, this is your first mission:`;
+    introLevelText.innerHTML = `Cel. ${player.playerName}, this is your mission:`;
     levelPlace.innerHTML = blottoGame.getBattleFieldName();
     numberOfTroops.innerHTML = `You have ${player.noOfTroops} troops available`;
+    //getting the list of battlefields for current level
+    for (let i = 0; i < blottoGame.noOfBattleFields; i++) {
+      let li = document.createElement("li");
+      li.innerHTML = `<h2>${bttlFieldIds[i]}</h2>
+              <div class='troops-list'>
+              <button class='btn-decremeter'>-</button>
+              <h4 class='troop-number'>0</h4>
+              <button class='btn-incremeter'>+</button></div>`;
+      bttlFieldList.appendChild(li);
+    }
+    let troopNumbers = document.getElementsByClassName("troop-number");
+    let btnDecremeter = document.getElementsByClassName("btn-decremeter");
+    for (let i = 0; i < btnDecremeter.length; i++) {
+      btnDecremeter[i].addEventListener("click", () => {
+        troopNumbers[i].innerHTML = Number(troopNumbers[i].innerHTML) - 1;
+      });
+    }
+    let btnIncremeter = document.getElementsByClassName("btn-incremeter");
+    for (let i = 0; i < btnDecremeter.length; i++) {
+      btnIncremeter[i].addEventListener("click", () => {
+        troopNumbers[i].innerHTML = Number(troopNumbers[i].innerHTML) + 1;
+      });
+    }
   }
 });
