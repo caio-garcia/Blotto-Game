@@ -49,8 +49,19 @@ class BlottoGame {
       "Tali-Ihantala",
       "Kharkov",
       "Rostov",
+      "Peterbourgh",
+      "Uttarpadesh",
     ];
-    const fieldNames = ["Lakes", "Hills", "Bunkers", "Villages", "Deserts"];
+    const fieldNames = [
+      "Lakes",
+      "Hills",
+      "Bunkers",
+      "Villages",
+      "Deserts",
+      "Boroughs",
+      "Forests",
+      "Mountains",
+    ];
 
     return `${this.noOfBattleFields} ${
       fieldNames[Math.floor(Math.random() * fieldNames.length)]

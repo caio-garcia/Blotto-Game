@@ -8,6 +8,7 @@ const srtBtn = document.getElementById("start-button");
 const levelPage = document.getElementById("level");
 const introLevelText = document.getElementById("level-intro");
 const levelPlace = document.getElementById("level-place");
+const numberOfTroops = document.getElementById("number-of-troops");
 
 const blottoGame = new BlottoGame();
 const player = new PlayerColonel();
@@ -40,5 +41,6 @@ srtBtn.addEventListener("click", () => {
     player.playerName = playerName.value;
     introLevelText.innerHTML = `Cel. ${player.playerName}, this is your first mission:`;
     levelPlace.innerHTML = blottoGame.getBattleFieldName();
+    numberOfTroops.innerHTML = `You have ${player.noOfTroops} troops available`;
   }
 });
