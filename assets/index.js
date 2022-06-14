@@ -40,8 +40,8 @@ const bttlFieldIds = [
 const atkBtn = document.getElementById("atk-btn");
 
 const blottoGame = new BlottoGame();
-const player = new PlayerColonel();
-const NPC = new NPCColonel();
+// const player = new PlayerColonel();
+// const NPC = new NPCColonel();
 
 //TypeWriting on Game Title
 let i = 0;
@@ -69,14 +69,16 @@ function lvlPgFunction() {
     startPage.style.display = "none";
     //showing up level's content
     levelPage.style.display = "initial";
-    player.playerName = playerName.value;
-    introLevelText.innerHTML = `Cel. ${player.playerName}, this is your mission:`;
+    blottoGame.playerName = playerName.value;
+    introLevelText.innerHTML = `Cel. ${blottoGame.playerName}, this is your mission:`;
     levelPlace.innerHTML = blottoGame.getBattleFieldName();
-    numberOfTroops.innerHTML = `You have ${player.noOfTroops} troops available`;
+    numberOfTroops.innerHTML = `You have <bold>${blottoGame.noOfTroops}</bold> troops available`;
+    //assinging battlefields to the engine
+    blottoGame.createBattleFields();
     //getting the list of battlefields for current level
     for (let i = 0; i < blottoGame.noOfBattleFields; i++) {
       let li = document.createElement("li");
-      li.innerHTML = `<h2>${bttlFieldIds[i]}</h2>
+      li.innerHTML = `<h2>Site ${bttlFieldIds[i]}</h2>
               <div class='troops-list'>
               <button class='btn-decremeter'>-</button>
               <h4 class='troop-number'>1</h4>
@@ -101,6 +103,12 @@ function lvlPgFunction() {
       });
     }
   }
+}
+
+//ATTACK function
+
+function attack() {
+  //
 }
 
 // START Button Action

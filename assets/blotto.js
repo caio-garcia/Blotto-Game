@@ -1,11 +1,17 @@
 class BlottoGame {
   constructor() {
+    this.playerName = "";
     this.noOfTroops = 6;
     this.noOfBattleFields = 3;
     this.battleFields = [];
+    this.level = 0;
   }
-  troopAssignment() {
-    return this.noOfTroops;
+  playerColonelName() {
+    return `Cel. ${this.playerName}`;
+  }
+
+  NPCColonelName() {
+    return `Cel. Hanke`;
   }
 
   createBattleFields() {
@@ -13,11 +19,25 @@ class BlottoGame {
       this.battleFields.push(0);
     }
   }
+
+  createNPCTroops() {
+    //
+  }
+
   raid(troops) {
     for (let i = 0; i < this.battleFields.length; i++) {
       this.battleFields[i] += troops[i];
     }
   }
+
+  checkTroopsOrder(troop) {
+    if (!troop.reduce((n, item) => n !== false && item >= n && item)) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   winnerEvaluation() {
     let playerScoring = 0;
     let NPCScoring = 0;
@@ -68,49 +88,28 @@ class BlottoGame {
     } of ${placeNames[Math.floor(Math.random() * placeNames.length)]}`;
   }
 }
-class PlayerColonel {
-  constructor() {
-    this.playerName = "";
-    this.noOfTroops = 6;
-  }
-  colonelName() {
-    return `Cel. ${this.playerName}`;
-  }
-  assignTroops(noOfTroops) {
-    this.noOfTroops = noOfTroops;
-  }
-  //   battleFieldDeployment(troops) {
-  //     //checking on non-decrescent rule
-  //     let decrecentArr = [...troops];
-  //     decrecentArr.sort((a, b) => {
-  //       return b - a;
-  //     });
+// class PlayerColonel {
+//   constructor() {
+//     this.playerName = "";
+//   }
+//   colonelName() {
+//     return `Cel. ${this.playerName}`;
+//   }
+// }
 
-  //     let status = true;
-  //     for (let i = 0; i < troops.length; i++) {
-  //       if (troops[i] === decrecentArr[i]) {
-  //         status *= true;
-  //       } else {
-  //         status *= false;
-  //       }
-  //     }
-  //     return status;
-  //   }
-}
+// class NPCColonel {
+//   constructor() {
+//     this.NPCColonelName = "Cel. Hanke";
+//   }
+//   colonelName() {
+//     return this.NPCColonelName;
+//   }
+//   battleFieldDeployment(troops) {}
 
-class NPCColonel {
-  constructor() {
-    this.NPCColonelName = "Cel. Hanke";
-    this.noOfTroops = 6;
-  }
-  colonelName() {
-    return this.NPCColonelName;
-  }
-  assignTroops(noOfTroops) {
-    this.noOfTroops = noOfTroops;
-  }
-  battleFieldDeployment(troops) {}
-}
+//   generateTroops() {
+//     //
+//   }
+// }
 
 //TESTING
 
@@ -129,12 +128,6 @@ console.log(NPCPlayer.colonelName());
 myGame.noOfTroops = 18;
 
 console.log(myGame.noOfTroops);
-
-player1.assignTroops(myGame.noOfTroops);
-NPCPlayer.assignTroops(myGame.noOfTroops);
-
-console.log(player1.noOfTroops);
-console.log(NPCPlayer.noOfTroops);
 
 //BATTLE FIELDS
 
@@ -158,4 +151,8 @@ console.log(myGame.winnerEvaluation());
 
 console.log(myGame.getBattleFieldName());
 console.log(myGame.getBattleFieldName());
-console.log(myGame.getBattleFieldName());
+
+//Troops order
+
+console.log(myGame.checkTroopsOrder(plTroops));
+console.log(myGame.checkTroopsOrder(npcTroops));
