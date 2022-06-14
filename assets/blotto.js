@@ -2,6 +2,8 @@ class BlottoGame {
   constructor() {
     this.playerName = "";
     this.noOfTroops = 6;
+    this.playerTroops = [];
+    this.npcTroops = [];
     this.noOfBattleFields = 3;
     this.battleFields = [];
     this.level = 0;
@@ -20,8 +22,107 @@ class BlottoGame {
     }
   }
 
+  levelUp() {
+    this.level += 1;
+    if (this.level % 2 === 0) {
+      this.noOfBattleFields += 3;
+    } else {
+      this.noOfTroops += 6;
+    }
+  }
+
   createNPCTroops() {
-    //
+    let npcTroopsArr = [];
+
+    switch (this.noOfTroops) {
+      case 6:
+        npcTroopsArr = [
+          [2, 2, 2],
+          [1, 2, 3],
+          [1, 1, 4],
+        ];
+        break;
+      case 12:
+        switch (this.noOfBattleFields) {
+          case 3:
+            npcTroopsArr = [
+              [4, 4, 4],
+              [1, 1, 10],
+              [1, 2, 9],
+              [1, 3, 8],
+              [1, 4, 7],
+              [1, 5, 6],
+              [2, 2, 8],
+              [3, 3, 6],
+            ];
+            break;
+          case 6:
+            npcTroopsArr = [
+              [2, 2, 2, 2, 2, 2],
+              [1, 1, 1, 1, 1, 7],
+              [1, 1, 1, 1, 2, 6],
+              [1, 1, 1, 1, 3, 5],
+              [1, 1, 1, 1, 4, 4],
+              [1, 1, 1, 2, 2, 5],
+              [1, 1, 2, 2, 2, 4],
+              [1, 2, 2, 2, 2, 3],
+            ];
+            break;
+        }
+        break;
+      case 18:
+        switch (this.noOfBattleFields) {
+          case 6:
+            npcTroopsArr = [
+              [3, 3, 3, 3, 3, 3],
+              [1, 1, 1, 1, 1, 13],
+              [1, 1, 1, 1, 2, 12],
+              [1, 1, 1, 1, 3, 11],
+              [1, 1, 1, 1, 4, 10],
+              [1, 1, 1, 1, 5, 9],
+              [1, 1, 1, 1, 6, 8],
+              [1, 1, 1, 1, 7, 7],
+              [1, 1, 1, 2, 6, 7],
+              [1, 1, 1, 3, 5, 7],
+              [1, 1, 1, 4, 4, 7],
+              [1, 1, 1, 2, 5, 8],
+              [1, 1, 1, 3, 4, 8],
+              [1, 1, 1, 4, 3, 8],
+              [1, 1, 1, 2, 4, 9],
+              [1, 1, 1, 3, 3, 9],
+              [1, 1, 2, 3, 3, 8],
+              [1, 1, 3, 3, 3, 7],
+              [1, 2, 3, 3, 3, 6],
+              [1, 3, 3, 3, 3, 5],
+              [2, 3, 3, 3, 3, 4],
+            ];
+            break;
+          case 9:
+            npcTroopsArr = [
+              [2, 2, 2, 2, 2, 2, 2, 2, 2],
+              [1, 1, 1, 1, 1, 1, 1, 1, 10],
+              [1, 1, 1, 1, 1, 1, 1, 2, 9],
+              [1, 1, 1, 1, 1, 1, 1, 3, 8],
+              [1, 1, 1, 1, 1, 1, 1, 4, 7],
+              [1, 1, 1, 1, 1, 1, 1, 5, 6],
+              [1, 1, 1, 1, 1, 1, 2, 4, 6],
+              [1, 1, 1, 1, 1, 1, 3, 3, 6],
+              [1, 1, 1, 1, 1, 2, 2, 3, 6],
+              [1, 1, 1, 1, 2, 2, 2, 2, 6],
+              [1, 1, 1, 2, 2, 2, 2, 2, 5],
+              [1, 1, 1, 1, 2, 2, 2, 3, 5],
+              [1, 1, 1, 1, 1, 2, 2, 4, 5],
+              [1, 1, 1, 1, 1, 1, 2, 5, 5],
+              [1, 1, 1, 1, 2, 2, 2, 4, 4],
+              [1, 1, 1, 2, 2, 2, 2, 3, 4],
+              [1, 1, 2, 2, 2, 2, 2, 3, 3],
+              [1, 2, 2, 2, 2, 2, 2, 2, 3],
+            ];
+            break;
+        }
+    }
+    this.npcTroops =
+      npcTroopsArr[Math.floor(Math.random() * npcTroopsArr.length)];
   }
 
   raid(troops) {
@@ -116,16 +217,16 @@ class BlottoGame {
 //NAMES
 const myGame = new BlottoGame();
 
-const player1 = new PlayerColonel("Caio Garcia");
+// const player1 = new PlayerColonel("Caio Garcia");
 
-console.log(player1.colonelName());
+// console.log(player1.colonelName());
 
-const NPCPlayer = new NPCColonel();
+// const NPCPlayer = new NPCColonel();
 
-console.log(NPCPlayer.colonelName());
+// console.log(NPCPlayer.colonelName());
 
 //TROOPS
-myGame.noOfTroops = 18;
+myGame.noOfTroops = 6;
 
 console.log(myGame.noOfTroops);
 
@@ -156,3 +257,104 @@ console.log(myGame.getBattleFieldName());
 
 console.log(myGame.checkTroopsOrder(plTroops));
 console.log(myGame.checkTroopsOrder(npcTroops));
+
+//NPC Troops creation
+// myGame.noOfTroops = 6;
+// myGame.noOfBattleFields = 9;
+myGame.createNPCTroops();
+console.log(myGame.npcTroops);
+
+//LEVEL UP TESTING
+console.log(`Leve is ${myGame.level}`);
+console.log(`BattleFields are ${myGame.noOfBattleFields}`);
+console.log(`Troops are ${myGame.noOfTroops}`);
+myGame.levelUp();
+console.log(`Leve is ${myGame.level}`);
+console.log(`BattleFields are ${myGame.noOfBattleFields}`);
+console.log(`Troops are ${myGame.noOfTroops}`);
+myGame.levelUp();
+console.log(`Leve is ${myGame.level}`);
+console.log(`BattleFields are ${myGame.noOfBattleFields}`);
+console.log(`Troops are ${myGame.noOfTroops}`);
+myGame.levelUp();
+console.log(`Leve is ${myGame.level}`);
+console.log(`BattleFields are ${myGame.noOfBattleFields}`);
+console.log(`Troops are ${myGame.noOfTroops}`);
+myGame.levelUp();
+console.log(`Leve is ${myGame.level}`);
+console.log(`BattleFields are ${myGame.noOfBattleFields}`);
+console.log(`Troops are ${myGame.noOfTroops}`);
+//FORMER Algorith  for creating random npc troops so that each element sum doesn't overpass the totalOfTroops
+
+// this.npcTroops = [];
+// let tempArr = [];
+// let maxOfi = this.battleFields.length;
+// let maxOfTroops = this.noOfTroops;
+// //random creation
+// for (let i = 0; i < maxOfi; i++) {
+//   tempArr.push(
+//     Math.floor(Math.random() * (maxOfTroops / maxOfi + (maxOfi - 1)) + 1)
+//   );
+// }
+
+// tempArr = tempArr.sort((a, b) => {
+//   return a - b;
+// });
+
+// //normalisation, so all element sum equals to noOfTroops
+// const normalizer = () => {
+//   let overpassed = 0;
+//   overpassed = Number(
+//     tempArr.reduce((acc, curr) => acc + curr, 0) - maxOfTroops
+//   );
+
+//   if (overpassed > 0) {
+//     tempArr.sort((a, b) => {
+//       return a - b;
+//     });
+
+//     let reducer = overpassed / maxOfi;
+
+//     tempArr = tempArr.map((num, index) => {
+//       if (index === tempArr.length - 1) {
+//         return Math.floor(num - reducer);
+//       } else {
+//         return num;
+//       }
+//     });
+
+//     tempArr.sort((a, b) => {
+//       return a - b;
+//     });
+//   } else if (overpassed < 0) {
+//     tempArr.sort((a, b) => {
+//       return a - b;
+//     });
+
+//     let incrementer = overpassed / maxOfi;
+
+//     tempArr = tempArr.map((num, index) => {
+//       if (index === tempArr.length - 1) {
+//         return Math.floor(num + incrementer);
+//       } else {
+//         return num;
+//       }
+//     });
+
+//     tempArr.sort((a, b) => {
+//       return a - b;
+//     });
+//   }
+
+//   overpassed = Number(
+//     tempArr.reduce((acc, curr) => acc + curr, 0) - maxOfTroops
+//   );
+//   //   if (overpassed !== 0) {
+//   //     normalizer();
+//   //   }
+// };
+
+// normalizer();
+
+// return (this.npcTroops = tempArr);
+//   }

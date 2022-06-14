@@ -105,10 +105,12 @@ function lvlPgFunction() {
   }
 }
 
+//Create Player Troops Function
+
 //ATTACK function
 
 function attack() {
-  //
+  blottoGame.createNPCTroops();
 }
 
 // START Button Action
