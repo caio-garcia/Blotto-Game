@@ -119,8 +119,6 @@ function gamePgFunction() {
   }
 }
 
-//Create Player Troops Function
-
 //ATTACK function
 
 function attack() {
@@ -136,6 +134,7 @@ function attack() {
   if (!blottoGame.checkTroopsOrder(plTroops)) {
     window.alert(`Troops are not in non-decrescent order`);
   }
+
   // console.log(blottoGame.winnerEvaluation(plTroops, tempNPCTroops));
   switch (blottoGame.winnerEvaluation(plTroops, tempNPCTroops)) {
     case "Victory":
@@ -162,3 +161,5 @@ atkBtn.addEventListener("click", () => {
     window.alert(`You still need to deploy ${availTroops[0].innerHTML} troops`);
   }
 });
+
+//Results Page function

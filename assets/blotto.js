@@ -148,18 +148,18 @@ class BlottoGame {
       tempBattleFields.push(pTroops[i] + npcTr[i]);
     }
 
-    // console.log(tempBattleFields);
+    console.log(tempBattleFields);
 
     for (let j = 0; j < tempBattleFields.length; j++) {
       if (tempBattleFields[j] > 0) {
         playerScoring += 1;
-      } else if (tempBattleFields < 0) {
+      } else if (tempBattleFields[j] < 0) {
         NPCScoring += 1;
       }
     }
 
-    // console.log(playerScoring);
-    // console.log(NPCScoring);
+    console.log(playerScoring);
+    console.log(NPCScoring);
 
     if (playerScoring > NPCScoring) {
       return `Victory`;
