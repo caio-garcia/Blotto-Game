@@ -101,6 +101,11 @@
     font-size: 1.4em;
   }
 
+  .enemy-sites {
+    color: red;
+    font-size: 1.4em;
+  }
+
   #level-battlefields ul {
     list-style: none;
     display: flex;

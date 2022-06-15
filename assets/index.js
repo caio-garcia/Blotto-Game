@@ -45,6 +45,7 @@ const winBtn = document.getElementById("win");
 const drawBtn = document.getElementById("draw");
 const defeatBtn = document.getElementById("defeat");
 const defeatText = document.getElementById("further-info-defeat");
+const rstMsgHead = document.getElementById("result-message-head");
 const rstMsg = document.getElementById("result-message");
 const siteResultsUl = document.getElementById("sites-results");
 
@@ -137,7 +138,8 @@ function resultsPg(rst, plScoring, npcScoring, btlFldRst) {
   console.log(npcScoring);
   console.log(btlFldRst);
 
-  rstMsg.innerText = ``;
+  rstMsgHead.innerText = `That was a ${rst.toUpperCase()}!`;
+  rstMsg.innerHTML = `<p>You conquered <bold class="available-troops">${plScoring}</bold> sites and Enemy got <bold class="enemy-sites">${npcScoring}</bold>.</p>`;
 
   switch (rst) {
     case "win":
@@ -207,7 +209,13 @@ function attack() {
 
 // START Button Action
 
-srtBtn.addEventListener("click", gamePgFunction);
+srtBtn.addEventListener("click", () => {
+  if (playerName.value === "") {
+    window.alert("Please enter a name!");
+  } else {
+    gamePgFunction();
+  }
+});
 
 atkBtn.addEventListener("click", () => {
   if (Number(availTroops[0].innerHTML) === 0) {
