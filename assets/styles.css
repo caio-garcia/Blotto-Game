@@ -126,6 +126,10 @@
     font-size: 1.2em;
   }
 
+  #result-page {
+    display: none;
+  }
+
   footer {
     padding-top: 25px;
     margin-left: 10px;

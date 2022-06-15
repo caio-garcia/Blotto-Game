@@ -40,6 +40,14 @@ const bttlFieldIds = [
 ];
 const atkBtn = document.getElementById("atk-btn");
 
+const rstPg = document.getElementById("result-page");
+const winBtn = document.getElementById("win");
+const drawBtn = document.getElementById("draw");
+const defeatBtn = document.getElementById("defeat");
+const defeatText = document.getElementById("further-info-defeat");
+const rstMsg = document.getElementById("result-message");
+const siteResultsUl = document.getElementById("sites-results");
+
 const blottoGame = new BlottoGame();
 // blottoGame.noOfTroops = 12;
 // blottoGame.noOfBattleFields = 6;
@@ -119,11 +127,42 @@ function gamePgFunction() {
   }
 }
 
+//Results Page function
+
+function resultsPg(rst, plScoring, npcScoring, btlFldRst) {
+  levelPage.style.display = "none";
+  rstPg.style.display = "initial";
+
+  console.log(plScoring);
+  console.log(npcScoring);
+  console.log(btlFldRst);
+
+  rstMsg.innerText = ``;
+
+  switch (rst) {
+    case "win":
+      defeatBtn.style.display = "none";
+      defeatText.style.display = "none";
+      drawBtn.style.display = "none";
+      break;
+    case "defeat":
+      drawBtn.style.display = "none";
+      winBtn.style.display = "none";
+      break;
+    case "draw":
+      winBtn.style.display = "none";
+      defeatBtn.style.display = "none";
+      defeatText.style.display = "none";
+      break;
+  }
+}
+
 //ATTACK function
 
 function attack() {
   blottoGame.createNPCTroops();
   let tempNPCTroops = blottoGame.npcTroops.map((elem) => elem * -1);
+  // let tempNPCTroops = [-2, -2, -2];
   console.log(tempNPCTroops);
   let sitesValues = document.querySelectorAll(".troop-number");
   plTroops = [];
@@ -135,17 +174,33 @@ function attack() {
     window.alert(`Troops are not in non-decrescent order`);
   }
 
-  // console.log(blottoGame.winnerEvaluation(plTroops, tempNPCTroops));
-  switch (blottoGame.winnerEvaluation(plTroops, tempNPCTroops)) {
+  let rstList = blottoGame.winnerEvaluation(plTroops, tempNPCTroops);
+  console.log(rstList);
+  switch (rstList[0]["result"]) {
     case "Victory":
       blottoGame.levelUp();
-      // gamePgFunction();
+      resultsPg(
+        "win",
+        rstList[0]["playerScore"],
+        rstList[0]["NPCScore"],
+        rstList[0]["BattleFieldResults"]
+      );
       break;
     case "Defeat":
-      console.log("Enemy Won");
+      resultsPg(
+        "defeat",
+        rstList[0]["playerScore"],
+        rstList[0]["NPCScore"],
+        rstList[0]["BattleFieldResults"]
+      );
       break;
     case `Draw`:
-      console.log("Try Again!");
+      resultsPg(
+        "draw",
+        rstList[0]["playerScore"],
+        rstList[0]["NPCScore"],
+        rstList[0]["BattleFieldResults"]
+      );
       break;
   }
 }
@@ -161,5 +216,3 @@ atkBtn.addEventListener("click", () => {
     window.alert(`You still need to deploy ${availTroops[0].innerHTML} troops`);
   }
 });
-
-//Results Page function

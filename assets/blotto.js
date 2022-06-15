@@ -158,15 +158,36 @@ class BlottoGame {
       }
     }
 
-    console.log(playerScoring);
-    console.log(NPCScoring);
+    // console.log(playerScoring);
+    // console.log(NPCScoring);
 
     if (playerScoring > NPCScoring) {
-      return `Victory`;
+      return [
+        {
+          result: `Victory`,
+          playerScore: playerScoring,
+          NPCScore: NPCScoring,
+          BattleFieldResults: [pTroops, npcTr],
+        },
+      ];
     } else if (playerScoring < NPCScoring) {
-      return `Defeat`;
+      return [
+        {
+          result: `Defeat`,
+          playerScore: playerScoring,
+          NPCScore: NPCScoring,
+          BattleFieldResults: [pTroops, npcTr],
+        },
+      ];
     } else {
-      return `Draw`;
+      return [
+        {
+          result: `Draw`,
+          playerScore: playerScoring,
+          NPCScore: NPCScoring,
+          BattleFieldResults: [pTroops, npcTr],
+        },
+      ];
     }
   }
 
