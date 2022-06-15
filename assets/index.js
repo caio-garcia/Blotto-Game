@@ -72,6 +72,7 @@ window.onload = typeWriter();
 //LEVEL page function
 
 function gamePgFunction() {
+  window.scrollTo(0, 0);
   if (playerName.value === "") {
     window.Error(`Please enter your name, Colonel!`);
   } else {
@@ -150,6 +151,7 @@ function resultsPg(rst, plScoring, npcScoring, btlFldRst) {
     case "defeat":
       drawBtn.style.display = "none";
       winBtn.style.display = "none";
+      defeatBtn.addEventListener("click", () => window.location.reload());
       break;
     case "draw":
       winBtn.style.display = "none";
