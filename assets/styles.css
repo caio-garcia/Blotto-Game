@@ -135,6 +135,14 @@
     display: none;
   }
 
+  #further-info-defeat {
+    display: none;
+  }
+
+  #result-buttons {
+    display: none;
+  }
+
   footer {
     padding-top: 25px;
     margin-left: 10px;

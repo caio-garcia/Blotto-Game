@@ -48,6 +48,7 @@ const defeatText = document.getElementById("further-info-defeat");
 const rstMsgHead = document.getElementById("result-message-head");
 const rstMsg = document.getElementById("result-message");
 const siteResultsUl = document.getElementById("sites-results");
+const rstButtons = document.getElementById("result-buttons");
 
 const blottoGame = new BlottoGame();
 // blottoGame.noOfTroops = 12;
@@ -132,31 +133,50 @@ function gamePgFunction() {
 //Results Page function
 
 function resultsPg(rst, plScoring, npcScoring, btlFldRst) {
+  window.scrollTo(0, 0);
+  startPage.style.display = "none";
   levelPage.style.display = "none";
   rstPg.style.display = "initial";
+  rstButtons.style.display = "initial";
 
   console.log(plScoring);
   console.log(npcScoring);
   console.log(btlFldRst);
 
   rstMsgHead.innerText = `That was a ${rst.toUpperCase()}!`;
-  rstMsg.innerHTML = `<p>You conquered <bold class="available-troops">${plScoring}</bold> sites and Enemy got <bold class="enemy-sites">${npcScoring}</bold>.</p>`;
+  rstMsg.innerHTML = `<p>You conquered <bold class="available-troops">${plScoring}</bold> site(s) and Enemy got <bold class="enemy-sites">${npcScoring}</bold> site(s).</p>`;
+
+  for (let i = 0; i < blottoGame.noOfBattleFields; i++) {
+    let rstLi = document.createElement("li");
+    rstLi.innerHTML = `<h2 class="available-troops">Site ${bttlFieldIds[i]}</h2>
+              <div class='troops-list'>
+              <p>You: ${btlFldRst[0][i]} troop(s)</p><br>
+              <p>Enemy: ${Number(btlFldRst[1][i]) * -1} troop(s)</p>`;
+    siteResultsUl.appendChild(rstLi);
+  }
+
+  siteResultsUl.style.display = "initial";
 
   switch (rst) {
     case "win":
+      blottoGame.levelUp();
       defeatBtn.style.display = "none";
       defeatText.style.display = "none";
       drawBtn.style.display = "none";
+      winBtn.addEventListener("click", gamePgFunction());
       break;
     case "defeat":
       drawBtn.style.display = "none";
       winBtn.style.display = "none";
+      defeatBtn.style.display = "block";
       defeatBtn.addEventListener("click", () => window.location.reload());
       break;
     case "draw":
       winBtn.style.display = "none";
       defeatBtn.style.display = "none";
       defeatText.style.display = "none";
+      drawBtn.style.display = "block";
+      drawBtn.addEventListener("click", () => gamePgFunction());
       break;
   }
 }
@@ -167,45 +187,45 @@ function attack() {
   blottoGame.createNPCTroops();
   let tempNPCTroops = blottoGame.npcTroops.map((elem) => elem * -1);
   // let tempNPCTroops = [-2, -2, -2];
-  console.log(tempNPCTroops);
+  // console.log(tempNPCTroops);
   let sitesValues = document.querySelectorAll(".troop-number");
   plTroops = [];
   for (let i = 0; i < sitesValues.length; i++) {
     plTroops.push(Number(sitesValues[i].innerText));
   }
-  console.log(plTroops);
+  // console.log(plTroops);
+  // console.log(tempNPCTroops);
   if (!blottoGame.checkTroopsOrder(plTroops)) {
     window.alert(`Troops are not in non-decrescent order`);
-  }
-
-  let rstList = blottoGame.winnerEvaluation(plTroops, tempNPCTroops);
-  console.log(rstList);
-  switch (rstList[0]["result"]) {
-    case "Victory":
-      blottoGame.levelUp();
-      resultsPg(
-        "win",
-        rstList[0]["playerScore"],
-        rstList[0]["NPCScore"],
-        rstList[0]["BattleFieldResults"]
-      );
-      break;
-    case "Defeat":
-      resultsPg(
-        "defeat",
-        rstList[0]["playerScore"],
-        rstList[0]["NPCScore"],
-        rstList[0]["BattleFieldResults"]
-      );
-      break;
-    case `Draw`:
-      resultsPg(
-        "draw",
-        rstList[0]["playerScore"],
-        rstList[0]["NPCScore"],
-        rstList[0]["BattleFieldResults"]
-      );
-      break;
+  } else {
+    let rstList = blottoGame.winnerEvaluation(plTroops, tempNPCTroops);
+    console.log(rstList);
+    switch (rstList[0]["result"]) {
+      case "Victory":
+        resultsPg(
+          "win",
+          rstList[0]["playerScore"],
+          rstList[0]["NPCScore"],
+          rstList[0]["BattleFieldResults"]
+        );
+        break;
+      case "Defeat":
+        resultsPg(
+          "defeat",
+          rstList[0]["playerScore"],
+          rstList[0]["NPCScore"],
+          rstList[0]["BattleFieldResults"]
+        );
+        break;
+      case `Draw`:
+        resultsPg(
+          "draw",
+          rstList[0]["playerScore"],
+          rstList[0]["NPCScore"],
+          rstList[0]["BattleFieldResults"]
+        );
+        break;
+    }
   }
 }
 
