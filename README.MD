@@ -25,9 +25,9 @@ This project was part of IronHack's FullStack Web Development course.
 
 ### Blotto Game in Game Theory
 
-[**Colonel Blotto Game**](https://en.wikipedia.org/wiki/Blotto_game) has been widely studied in Game Theory for its applications and its replication of **[Nash Equilibrium](https://en.wikipedia.org/wiki/Nash_equilibrium)**
+[**Colonel Blotto Game**](https://en.wikipedia.org/wiki/Blotto_game) has been widely studied in Game Theory for its applications and its replication of **[Nash Equilibrium](https://en.wikipedia.org/wiki/Nash_equilibrium)** paradigm.
 
-Please, check up some onlie artiles to improve your gaming.
+Please, check up some online artiles to improve your gaming.
 
 #### Would like to contribute to this game?
 
