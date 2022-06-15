@@ -224,8 +224,8 @@ function resultsPg(rst, plScoring, npcScoring, btlFldRst) {
 
 function attack() {
   blottoGame.createNPCTroops();
-  // let tempNPCTroops = blottoGame.npcTroops.map((elem) => elem * -1);
-  let tempNPCTroops = [-1, -1, -4];
+  let tempNPCTroops = blottoGame.npcTroops.map((elem) => elem * -1);
+  // let tempNPCTroops = [-1, -1, -4];
   // console.log(tempNPCTroops);
   let sitesValues = document.querySelectorAll(".troop-number");
   plTroops = [];
