@@ -9,6 +9,7 @@ const levelPage = document.getElementById("level");
 const introLevelText = document.getElementById("level-intro");
 const levelPlace = document.getElementById("level-place");
 const numberOfTroops = document.getElementById("number-of-troops");
+let availTroops = document.getElementsByClassName("available-troops");
 const bttlFieldList = document.querySelector("#level-battlefields ul");
 const bttlFieldIds = [
   "A",
@@ -40,8 +41,8 @@ const bttlFieldIds = [
 const atkBtn = document.getElementById("atk-btn");
 
 const blottoGame = new BlottoGame();
-// const player = new PlayerColonel();
-// const NPC = new NPCColonel();
+// blottoGame.noOfTroops = 12;
+// blottoGame.noOfBattleFields = 6;
 
 //TypeWriting on Game Title
 let i = 0;
@@ -72,9 +73,9 @@ function gamePgFunction() {
     blottoGame.playerName = playerName.value;
     introLevelText.innerHTML = `Cel. ${blottoGame.playerName}, this is your mission:`;
     levelPlace.innerHTML = blottoGame.getBattleFieldName();
-    numberOfTroops.innerHTML = `You still have <bold class="available-troops">${
+    numberOfTroops.innerHTML = `<h3>You still have <bold class="available-troops">${
       blottoGame.noOfTroops - blottoGame.noOfBattleFields
-    }</bold> troops available`;
+    }</bold> troops available</h3>`;
     //assinging battlefields to the engine
     blottoGame.createBattleFields();
     //getting the list of battlefields for current level
@@ -87,7 +88,6 @@ function gamePgFunction() {
               <button class='btn-incremeter'>+</button></div>`;
       bttlFieldList.appendChild(li);
     }
-    let availTroops = document.getElementsByClassName("available-troops");
     // console.log(availTroops[0].innerHTML);
     let troopNumbers = document.getElementsByClassName("troop-number");
     let btnDecremeter = document.getElementsByClassName("btn-decremeter");
@@ -125,6 +125,30 @@ function gamePgFunction() {
 
 function attack() {
   blottoGame.createNPCTroops();
+  let tempNPCTroops = blottoGame.npcTroops.map((elem) => elem * -1);
+  console.log(tempNPCTroops);
+  let sitesValues = document.querySelectorAll(".troop-number");
+  plTroops = [];
+  for (let i = 0; i < sitesValues.length; i++) {
+    plTroops.push(Number(sitesValues[i].innerText));
+  }
+  console.log(plTroops);
+  if (!blottoGame.checkTroopsOrder(plTroops)) {
+    window.alert(`Troops are not in non-decrescent order`);
+  }
+  // console.log(blottoGame.winnerEvaluation(plTroops, tempNPCTroops));
+  switch (blottoGame.winnerEvaluation(plTroops, tempNPCTroops)) {
+    case "Victory":
+      blottoGame.levelUp();
+      // gamePgFunction();
+      break;
+    case "Defeat":
+      console.log("Enemy Won");
+      break;
+    case `Draw`:
+      console.log("Try Again!");
+      break;
+  }
 }
 
 // START Button Action
@@ -132,5 +156,9 @@ function attack() {
 srtBtn.addEventListener("click", gamePgFunction);
 
 atkBtn.addEventListener("click", () => {
-  console.log("ATTACK!");
+  if (Number(availTroops[0].innerHTML) === 0) {
+    attack();
+  } else {
+    window.alert(`You still need to deploy ${availTroops[0].innerHTML} troops`);
+  }
 });

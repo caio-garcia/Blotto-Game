@@ -139,23 +139,34 @@ class BlottoGame {
     }
   }
 
-  winnerEvaluation() {
+  winnerEvaluation(pTroops, npcTr) {
+    let tempBattleFields = [];
     let playerScoring = 0;
     let NPCScoring = 0;
-    for (let i = 0; i < this.battleFields.length; i++) {
-      if (this.battleFields[i] > 0) {
+
+    for (let i = 0; i < this.noOfBattleFields; i++) {
+      tempBattleFields.push(pTroops[i] + npcTr[i]);
+    }
+
+    // console.log(tempBattleFields);
+
+    for (let j = 0; j < tempBattleFields.length; j++) {
+      if (tempBattleFields[j] > 0) {
         playerScoring += 1;
-      } else if (this.battleFields[i] < 0) {
+      } else if (tempBattleFields < 0) {
         NPCScoring += 1;
       }
     }
 
+    // console.log(playerScoring);
+    // console.log(NPCScoring);
+
     if (playerScoring > NPCScoring) {
-      return `Player Won`;
+      return `Victory`;
     } else if (playerScoring < NPCScoring) {
-      return `NPC Won`;
+      return `Defeat`;
     } else {
-      return `This was a draw!`;
+      return `Draw`;
     }
   }
 
@@ -246,7 +257,7 @@ console.log(myGame.battleFields);
 
 //EVALUATION
 
-console.log(myGame.winnerEvaluation());
+// console.log(myGame.winnerEvaluation());
 
 //BattleField name
 
@@ -284,6 +295,7 @@ myGame.levelUp();
 console.log(`Leve is ${myGame.level}`);
 console.log(`BattleFields are ${myGame.noOfBattleFields}`);
 console.log(`Troops are ${myGame.noOfTroops}`);
+
 //FORMER Algorith  for creating random npc troops so that each element sum doesn't overpass the totalOfTroops
 
 // this.npcTroops = [];

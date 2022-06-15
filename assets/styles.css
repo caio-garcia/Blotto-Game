@@ -96,6 +96,11 @@
     display: none;
   }
 
+  .available-troops {
+    color: rgba(75, 83, 32, 1);
+    font-size: 1.4em;
+  }
+
   #level-battlefields ul {
     list-style: none;
     display: flex;
