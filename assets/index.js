@@ -72,6 +72,18 @@ function typeWriter() {
 
 window.onload = typeWriter();
 
+//remvoe li function
+
+function removeLi() {
+  let li = "";
+
+  for (let j = 0; j < blottoGame.noOfBattleFields; j++) {
+    li = document.querySelector("li");
+    li.innerHTML = ``;
+    bttlFieldList.remove(li);
+  }
+}
+
 //LEVEL page function
 
 function gamePgFunction() {
@@ -95,6 +107,15 @@ function gamePgFunction() {
     blottoGame.createBattleFields();
     //getting the list of battlefields for current level
     let li = "";
+
+    // for (let j = 0; j < blottoGame.noOfBattleFields; j++) {
+    //   li = document.querySelector('li');
+    //   li.innerHTML = ``;
+    //   bttlFieldList.appendChild(li);
+    // }
+
+    // if (blottoGame.level % 2 === 0) {
+    bttlFieldList.innerHTML = "";
     for (let i = 0; i < blottoGame.noOfBattleFields; i++) {
       li = document.createElement("li");
       li.innerHTML = `<h2>Site ${bttlFieldIds[i]}</h2>
@@ -104,6 +125,7 @@ function gamePgFunction() {
               <button class='btn-incremeter'>+</button></div>`;
       bttlFieldList.appendChild(li);
     }
+    // }
     // console.log(availTroops[0].innerHTML);
     let troopNumbers = document.getElementsByClassName("troop-number");
     let btnDecremeter = document.getElementsByClassName("btn-decremeter");
@@ -151,6 +173,8 @@ function resultsPg(rst, plScoring, npcScoring, btlFldRst) {
   rstMsgHead.innerText = `That was a ${rst.toUpperCase()}!`;
   rstMsg.innerHTML = `<p>You conquered <bold class="available-troops">${plScoring}</bold> site(s) and Enemy got <bold class="enemy-sites">${npcScoring}</bold> site(s).</p>`;
 
+  siteResultsUl.innerHTML = "";
+
   for (let i = 0; i < blottoGame.noOfBattleFields; i++) {
     let rstLi = document.createElement("li");
     rstLi.innerHTML = `<h2 class="available-troops">Site ${bttlFieldIds[i]}</h2>
@@ -168,8 +192,10 @@ function resultsPg(rst, plScoring, npcScoring, btlFldRst) {
       defeatBtn.style.display = "none";
       defeatText.style.display = "none";
       drawBtn.style.display = "none";
+      winBtn.style.display = "initial";
       winBtn.addEventListener("click", () => {
         winBtn.style.display = "none";
+        // removeLi();
         gamePgFunction();
         //
       });
@@ -177,14 +203,14 @@ function resultsPg(rst, plScoring, npcScoring, btlFldRst) {
     case "defeat":
       drawBtn.style.display = "none";
       winBtn.style.display = "none";
-      defeatBtn.style.display = "block";
+      defeatBtn.style.display = "initial";
       defeatBtn.addEventListener("click", () => window.location.reload());
       break;
     case "draw":
       winBtn.style.display = "none";
       defeatBtn.style.display = "none";
       defeatText.style.display = "none";
-      drawBtn.style.display = "block";
+      drawBtn.style.display = "initial";
       drawBtn.addEventListener("click", () => {
         rstPg.style.display = "none";
         levelPage.style.display = "initial";
@@ -218,6 +244,7 @@ function attack() {
     console.log(rstList);
     switch (rstList[0]["result"]) {
       case "Victory":
+        console.log("Win");
         resultsPg(
           "win",
           rstList[0]["playerScore"],
@@ -226,6 +253,7 @@ function attack() {
         );
         break;
       case "Defeat":
+        console.log("Defeat");
         resultsPg(
           "defeat",
           rstList[0]["playerScore"],
@@ -234,6 +262,7 @@ function attack() {
         );
         break;
       case `Draw`:
+        console.log("Draw");
         resultsPg(
           "draw",
           rstList[0]["playerScore"],
