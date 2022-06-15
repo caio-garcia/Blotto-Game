@@ -79,6 +79,8 @@ function gamePgFunction() {
   } else {
     //disabling initial content
     startPage.style.display = "none";
+    rstPg.style.display = "none";
+
     //showing up level's content
     levelPage.style.display = "initial";
     blottoGame.playerName = playerName.value;
@@ -90,8 +92,9 @@ function gamePgFunction() {
     //assinging battlefields to the engine
     blottoGame.createBattleFields();
     //getting the list of battlefields for current level
+    let li = "";
     for (let i = 0; i < blottoGame.noOfBattleFields; i++) {
-      let li = document.createElement("li");
+      li = document.createElement("li");
       li.innerHTML = `<h2>Site ${bttlFieldIds[i]}</h2>
               <div class='troops-list'>
               <button class='btn-decremeter'>-</button>
@@ -133,7 +136,7 @@ function gamePgFunction() {
 //Results Page function
 
 function resultsPg(rst, plScoring, npcScoring, btlFldRst) {
-  window.scrollTo(0, 0);
+  // window.scrollTo(10, 0);
   startPage.style.display = "none";
   levelPage.style.display = "none";
   rstPg.style.display = "initial";
@@ -163,7 +166,11 @@ function resultsPg(rst, plScoring, npcScoring, btlFldRst) {
       defeatBtn.style.display = "none";
       defeatText.style.display = "none";
       drawBtn.style.display = "none";
-      winBtn.addEventListener("click", gamePgFunction());
+      winBtn.addEventListener("click", () => {
+        winBtn.style.display = "none";
+        gamePgFunction();
+        //
+      });
       break;
     case "defeat":
       drawBtn.style.display = "none";
@@ -176,7 +183,11 @@ function resultsPg(rst, plScoring, npcScoring, btlFldRst) {
       defeatBtn.style.display = "none";
       defeatText.style.display = "none";
       drawBtn.style.display = "block";
-      drawBtn.addEventListener("click", () => gamePgFunction());
+      drawBtn.addEventListener("click", () => {
+        rstPg.style.display = "none";
+        levelPage.style.display = "initial";
+        drawBtn.style.display = "none";
+      });
       break;
   }
 }
@@ -185,8 +196,8 @@ function resultsPg(rst, plScoring, npcScoring, btlFldRst) {
 
 function attack() {
   blottoGame.createNPCTroops();
-  let tempNPCTroops = blottoGame.npcTroops.map((elem) => elem * -1);
-  // let tempNPCTroops = [-2, -2, -2];
+  // let tempNPCTroops = blottoGame.npcTroops.map((elem) => elem * -1);
+  let tempNPCTroops = [-1, -1, -4];
   // console.log(tempNPCTroops);
   let sitesValues = document.querySelectorAll(".troop-number");
   plTroops = [];
