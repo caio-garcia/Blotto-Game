@@ -4,6 +4,7 @@ const gameHeader = document.getElementById("main - title");
 const startPage = document.getElementById("start-page");
 const playerName = document.getElementById("player-name");
 const srtBtn = document.getElementById("start-button");
+const nameErr = document.getElementById("name-error");
 
 const levelPage = document.getElementById("level");
 const introLevelText = document.getElementById("level-intro");
@@ -39,6 +40,7 @@ const bttlFieldIds = [
   "Z",
 ];
 const atkBtn = document.getElementById("atk-btn");
+const errDecrBtn = document.getElementById("decrescent-error");
 
 const rstPg = document.getElementById("result-page");
 const winBtn = document.getElementById("win");
@@ -207,7 +209,10 @@ function attack() {
   // console.log(plTroops);
   // console.log(tempNPCTroops);
   if (!blottoGame.checkTroopsOrder(plTroops)) {
-    window.alert(`Troops are not in non-decrescent order`);
+    errDecrBtn.innerHTML = `<p>Troops are not in non-decrescent order</p>`;
+    errDecrBtn.style.display = "initial";
+    errDecrBtn.style.color = "red";
+    // window.alert(`Troops are not in non-decrescent order`);
   } else {
     let rstList = blottoGame.winnerEvaluation(plTroops, tempNPCTroops);
     console.log(rstList);
@@ -244,7 +249,10 @@ function attack() {
 
 srtBtn.addEventListener("click", () => {
   if (playerName.value === "") {
-    window.alert("Please enter a name!");
+    nameErr.innerHTML = `<p>Please enter a name!</p>`;
+    nameErr.style.display = "initial";
+    nameErr.style.color = "red";
+    // window.alert("Please enter a name!");
   } else {
     gamePgFunction();
   }
@@ -254,6 +262,10 @@ atkBtn.addEventListener("click", () => {
   if (Number(availTroops[0].innerHTML) === 0) {
     attack();
   } else {
-    window.alert(`You still need to deploy ${availTroops[0].innerHTML} troops`);
+    // console.log(errDecrBtn);
+    errDecrBtn.innerHTML = `<p>You still need to deploy ${availTroops[0].innerHTML} troops</p>`;
+    errDecrBtn.style.display = "initial";
+    errDecrBtn.style.color = "red";
+    // window.alert(`You still need to deploy ${availTroops[0].innerHTML} troops`);
   }
 });

@@ -94,6 +94,10 @@
     font-family: var(--font);
   }
 
+  #name-error {
+    display: none;
+  }
+
   #level {
     display: none;
   }
@@ -123,6 +127,10 @@
     border-radius: 12px;
     height: 55px;
     width: 55px;
+  }
+
+  #decrescent-error {
+    display: none;
   }
 
   .troops-list {
@@ -280,6 +288,9 @@
     border-radius: 12px;
     height: 55px;
     width: 55px;
+  }
+  #decrescent-error {
+    display: none;
   }
 
   .troops-list {
@@ -439,6 +450,10 @@
     border-radius: 12px;
     height: 55px;
     width: 55px;
+  }
+
+  #decrescent-error {
+    display: none;
   }
 
   .troops-list {
