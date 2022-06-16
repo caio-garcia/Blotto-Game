@@ -145,6 +145,12 @@
     display: none;
   }
 
+  #result-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
   #further-info-defeat {
     display: none;
   }
@@ -304,7 +310,11 @@
   #result-page {
     display: none;
   }
-
+  #result-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
   #further-info-defeat {
     display: none;
   }
@@ -466,6 +476,12 @@
 
   #result-page {
     display: none;
+  }
+
+  #result-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
   }
 
   #further-info-defeat {

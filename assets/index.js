@@ -51,6 +51,7 @@ const rstMsgHead = document.getElementById("result-message-head");
 const rstMsg = document.getElementById("result-message");
 const siteResultsUl = document.getElementById("sites-results");
 const rstButtons = document.getElementById("result-buttons");
+let drawCounter = 0;
 
 const blottoGame = new BlottoGame();
 // blottoGame.noOfTroops = 12;
@@ -188,6 +189,7 @@ function resultsPg(rst, plScoring, npcScoring, btlFldRst) {
 
   switch (rst) {
     case "win":
+      drawCounter = 0;
       blottoGame.levelUp();
       defeatBtn.style.display = "none";
       defeatText.style.display = "none";
@@ -201,17 +203,24 @@ function resultsPg(rst, plScoring, npcScoring, btlFldRst) {
       });
       break;
     case "defeat":
+      drawCounter = 0;
       drawBtn.style.display = "none";
       winBtn.style.display = "none";
+      defeatText.style.display = "initial";
       defeatBtn.style.display = "initial";
       defeatBtn.addEventListener("click", () => window.location.reload());
       break;
     case "draw":
+      drawCounter += 1;
       winBtn.style.display = "none";
       defeatBtn.style.display = "none";
       defeatText.style.display = "none";
       drawBtn.style.display = "initial";
+      if (drawCounter > 1) {
+        defeatText.style.display = "initial";
+      }
       drawBtn.addEventListener("click", () => {
+        errDecrBtn.style.display = "none";
         rstPg.style.display = "none";
         levelPage.style.display = "initial";
         drawBtn.style.display = "none";
