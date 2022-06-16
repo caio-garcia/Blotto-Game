@@ -33,3 +33,7 @@ Please, check up some online artiles to improve your gaming.
 
 Please create an incident on this repo so we can improve it!
 Or contact me directly either via [Github](https://github.com/caio-garcia) or [Linkedin](https://www.linkedin.com/in/caiopgarcia/)
+
+#### Project Slides
+
+[Blotto Game Project](https://docs.google.com/presentation/d/1r4dpw7np_ZudRqC0seVSvrlsZbcbKyfQAY1B_uzhlOA/edit?usp=sharing)
